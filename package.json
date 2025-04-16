@@ -1,0 +1,46 @@
+{
+  "repository": {
+    "url": "git+https://github.com/algrith/safari-number-input-paste-event-handler.git",
+    "type": "git"
+  },
+  "homepage": "https://github.com/algrith/safari-number-input-paste-event-handler.git",
+  "name": "@algrith/safari-number-paste-handler",
+  "module": "dist/index.module.js",
+  "unpkg": "dist/index.umd.js",
+  "source": "src/index.ts",
+  "main": "dist/index.js",
+  "version": "1.0.4",
+  "type": "module",
+  "files": [
+    "/LICENSE",
+    "/README.md",
+    "/dist",
+    "/package.json"
+  ],
+  "scripts": {
+    "dev": "microbundle --css-modules true watch",
+    "build": "microbundle --css-modules true"
+  },
+  "devDependencies": {
+    "microbundle": "^0.15.1",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": "18.0.0 - 22.x.x"
+  },
+  "description": "A lightweight utility to safely handle paste events on <input type=\"number\"> fields in Safari. Provides a browser-aware workaround that preserves caret position, sanitizes multiple decimal points, and works with React, Vue, Angular, or vanilla JavaScript.",
+  "keywords": [
+    "safari",
+    "paste",
+    "number input"
+  ],
+  "author": "Algrith LLC <algrithllc@gmail.com> (https://algrith-astongemmy.vercel.app)",
+  "license": "MIT",
+  "types": "./dist/index.d.ts",
+  "bugs": {
+    "url": "https://github.com/algrith/safari-number-input-paste-event-handler/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
