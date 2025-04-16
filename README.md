@@ -4,7 +4,7 @@
 
 <div align="center">
   <h2>
-    🧩 A lightweight utility to safely handle paste events on `<input type="number">` fields in Safari.
+    🧩 A lightweight utility to safely handle paste events on number input fields in Safari.
   </h2>
 </div>
 
