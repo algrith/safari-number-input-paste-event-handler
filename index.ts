@@ -5,7 +5,7 @@ import { FormatNumberInputValue, ResolveMultipleDecimals } from './types';
  *
  * @returns A boolean indicating whether the browser is Safari.
  */
-const browserIsSafari: () => boolean = () => /^((?!chrome|android|crios).)*safari/i.test(navigator.userAgent);
+export const browserIsSafari: () => boolean = () => /^((?!chrome|android|crios).)*safari/i.test(navigator.userAgent);
 
 
 /**
@@ -73,7 +73,7 @@ export const formatNumberInputValue: FormatNumberInputValue = (event, changeHand
  * resolveMultipleDecimals("");         // Returns 0
  * ```
  */
-const resolveMultipleDecimals: ResolveMultipleDecimals = (value = '') => {
+export const resolveMultipleDecimals: ResolveMultipleDecimals = (value = '') => {
   const parts = value.toString().trim().split('.');
   if (parts.length <= 1) return Number(value);
   const decimalPart = parts.slice(1).join('');
