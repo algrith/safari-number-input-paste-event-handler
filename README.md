@@ -1,4 +1,4 @@
-# safari-number-paste-handler
+# @algrith/safari-number-paste-handler
 
 > 🧩 A lightweight utility to safely handle paste events on `<input type="number">` fields in Safari.
 
@@ -32,7 +32,7 @@ yarn add @algrith/safari-number-paste-handler
 ### ReactJs
 
 ```jsx
-import { formatNumberInputValue } from 'safari-number-paste-handler';
+import { formatNumberInputValue } from '@algrith/safari-number-paste-handler';
 
 const handleChange = (e) => {
   console.log(e.target.value);
@@ -49,7 +49,7 @@ const handleChange = (e) => {
 
 ```vue
 <script setup>
-import { formatNumberInputValue } from 'safari-number-paste-handler';
+import { formatNumberInputValue } from '@algrith/safari-number-paste-handler';
 
 const handleChange = (e) => {
   console.log(e.target.value);
@@ -68,7 +68,7 @@ const handleChange = (e) => {
 ### Angular
 
 ```
-import { formatNumberInputValue } from 'safari-number-paste-handler';
+import { formatNumberInputValue } from '@algrith/safari-number-paste-handler';
 
 onPaste(event: ClipboardEvent) {
   formatNumberInputValue(event, this.onChange.bind(this));
@@ -81,7 +81,7 @@ onPaste(event: ClipboardEvent) {
 <input id="numInput" type="number" />
 
 <script type="module">
-  import { formatNumberInputValue } from 'https://cdn.skypack.dev/safari-number-paste-handler';
+  import { formatNumberInputValue } from 'https://cdn.skypack.dev/@algrith/safari-number-paste-handler';
 
   const input = document.getElementById('numInput');
   input.addEventListener('paste', (e) => {

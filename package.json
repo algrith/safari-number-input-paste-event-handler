@@ -1,9 +1,9 @@
 {
   "repository": {
-    "url": "git+https://github.com/algrith/safari-number-input-paste-event-handler.git",
+    "url": "git+https://github.com/algrith/safari-number-paste-handler.git",
     "type": "git"
   },
-  "homepage": "https://github.com/algrith/safari-number-input-paste-event-handler.git",
+  "homepage": "https://github.com/algrith/safari-number-paste-handler.git",
   "name": "@algrith/safari-number-paste-handler",
   "module": "dist/index.module.js",
   "unpkg": "dist/index.umd.js",
@@ -38,7 +38,7 @@
   "license": "MIT",
   "types": "./dist/index.d.ts",
   "bugs": {
-    "url": "https://github.com/algrith/safari-number-input-paste-event-handler/issues"
+    "url": "https://github.com/algrith/safari-number-paste-handler/issues"
   },
   "publishConfig": {
     "access": "public"
