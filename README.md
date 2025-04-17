@@ -23,12 +23,12 @@ Safari does not properly sanitize pasted content in `<input type="number">` fiel
 
 ##  🚀 Features
 
-- ✅ Fixes Safari-specific paste behavior for number inputs
 - ✅ Ignores paste action when non-numeric characters are found in pasted value
-- ✅ Ensures only one decimal point is allowed
-- ✅ Maintains accurate caret position on insert
-- ✅ TypeScript support
+- ✅ Fixes Safari-specific paste behavior for number inputs
 - ✅ Works with React, Vue, Angular, or plain JavaScript
+- ✅ Maintains accurate caret position on insert
+- ✅ Ensures only one decimal point is allowed
+- ✅ TypeScript support
 
 
 ##  📦 Installation
@@ -44,16 +44,16 @@ yarn add @algrith/safari-number-paste-handler
 
 ### ReactJs
 
-```jsx
-import { formatNumberInputValue } from '@algrith/safari-number-paste-handler';
+```tsx
+import { pasteEventHandler } from '@algrith/safari-number-paste-handler';
 
-const handleChange = (e) => {
-  console.log(e.target.value);
+const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  console.log(event.target.value);
 };
 
 <input
   type="number"
-  onPaste={(e) => formatNumberInputValue(e, handleChange)}
+  onPaste={(e) => pasteEventHandler(e, handleChange)}
   onChange={handleChange}
 />
 ```
@@ -63,7 +63,7 @@ const handleChange = (e) => {
 
 ```vue
 <script setup>
-import { formatNumberInputValue } from '@algrith/safari-number-paste-handler';
+import { pasteEventHandler } from '@algrith/safari-number-paste-handler';
 
 const handleChange = (e) => {
   console.log(e.target.value);
@@ -73,7 +73,7 @@ const handleChange = (e) => {
 <template>
   <input
     type="number"
-    @paste="(e) => formatNumberInputValue(e, handleChange)"
+    @paste="(e) => pasteEventHandler(e, handleChange)"
     @input="handleChange"
   />
 </template>
@@ -82,10 +82,10 @@ const handleChange = (e) => {
 ### Angular
 
 ```ts
-import { formatNumberInputValue } from '@algrith/safari-number-paste-handler';
+import { pasteEventHandler } from '@algrith/safari-number-paste-handler';
 
 onPaste(event: ClipboardEvent) {
-  formatNumberInputValue(event, this.onChange.bind(this));
+  pasteEventHandler(event, this.onChange.bind(this));
 }
 ```
 
@@ -95,11 +95,11 @@ onPaste(event: ClipboardEvent) {
 <input id="numInput" type="number" />
 
 <script type="module">
-  import { formatNumberInputValue } from 'https://cdn.skypack.dev/@algrith/safari-number-paste-handler';
+  import { pasteEventHandler } from 'https://cdn.skypack.dev/@algrith/safari-number-paste-handler';
 
   const input = document.getElementById('numInput');
   input.addEventListener('paste', (e) => {
-    formatNumberInputValue(e, (event) => {
+    pasteEventHandler(e, (event) => {
       console.log('Updated value:', event.target.value);
     });
   });

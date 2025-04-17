@@ -1,4 +1,4 @@
-import { FormatNumberInputValue, ResolveMultipleDecimals } from './types';
+import { PasteEventHandler, ResolveMultipleDecimals } from './types';
 
 /**
  * Determines if the current browser is Safari.
@@ -12,23 +12,29 @@ export const browserIsSafari: () => boolean = () => /^((?!chrome|android|crios).
  * Handles the paste event for number inputs in Safari, ensuring proper formatting.
  *
  * @param event - The ClipboardEvent triggered by the paste action.
- * @param changeHandler - A callback function to handle the change event.
+ * @param changeEventHandler - A callback function to handle the change event.
  */
-export const formatNumberInputValue: FormatNumberInputValue = (event, changeHandler) => {
-  const eventTarget = event.target as HTMLInputElement;
+export const pasteEventHandler: PasteEventHandler = (event, changeEventHandler) => {
+  if (!(event.target instanceof HTMLInputElement)) return;
+  const nativeEvent = (event as any)?.nativeEvent ?? event;
+  if (!(nativeEvent instanceof ClipboardEvent)) return;
+
+  const notNumberInput = event.target.type !== 'number';
   const isSafariBrowser = browserIsSafari();
 
   // Only apply workaround on Safari and number inputs.
-  if (eventTarget?.type !== 'number' || !isSafariBrowser) return;
+  if (notNumberInput || !isSafariBrowser) return;
+  
+  const input = event.target;
 
-  const pastedValue = resolveMultipleDecimals(event?.clipboardData?.getData?.('text') || '');
-  const currentValue = eventTarget.value;
+  const clipboardText = event?.clipboardData?.getData?.('text') || '';
+  const pastedValue = resolveMultipleDecimals(clipboardText);
+  const currentValue = input.value;
 
   // Prevent default paste handling.
   event.preventDefault();
-
+  
   // Temporarily convert to text input to access selectionStart/End.
-  const input = eventTarget;
   input.type = 'text';
 
   const pastedValueHasDecimalPoint = pastedValue.toString().includes('.');
@@ -52,7 +58,7 @@ export const formatNumberInputValue: FormatNumberInputValue = (event, changeHand
   input.type = 'number';
 
   // Manually fire change handler to update state.
-  changeHandler(event);
+  changeEventHandler(event);
 };
 
 
