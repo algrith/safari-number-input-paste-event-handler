@@ -1,4 +1,4 @@
-import { PasteEventHandler, ResolveMultipleDecimals } from './types';
+import { ChangeEventHandler, PasteEventHandler, ResolveMultipleDecimals } from './types';
 
 /**
  * Determines if the current browser is Safari.
@@ -19,11 +19,8 @@ export const pasteEventHandler: PasteEventHandler = (event, changeEventHandler) 
   const nativeEvent = (event as any)?.nativeEvent ?? event;
   if (!(nativeEvent instanceof ClipboardEvent)) return;
 
-  const notNumberInput = event.target.type !== 'number';
-  const isSafariBrowser = browserIsSafari();
-
-  // Only apply workaround on Safari and number inputs.
-  if (notNumberInput || !isSafariBrowser) return;
+  // Only apply on number inputs in Safari.
+  if (!isNumberInputInSafari(event.target)) return;
   
   const input = event.target;
 
@@ -86,4 +83,67 @@ export const resolveMultipleDecimals: ResolveMultipleDecimals = (value = '') => 
   const integerPart = parts[0];
 
   return Number(`${integerPart}.${decimalPart}`);
+};
+
+
+/**
+ * Checks if the given input element is a number input in Safari.
+ *
+ * @param eventTarget - The HTMLInputElement to check.
+ * @returns A boolean indicating whether the input is a number input in Safari.
+ */
+export const isNumberInputInSafari = (eventTarget: HTMLInputElement) => {
+  return eventTarget.type === 'number' && browserIsSafari();
+};
+
+
+/**
+ * Handles the `keydown` event for number input fields in Safari, ensuring only valid input is allowed.
+ *
+ * This function prevents invalid characters from being entered into number input fields
+ * and allows only specific keys, digits, and a single decimal point if not already present.
+ * It is specifically designed to address Safari-specific behavior for number inputs.
+ *
+ * @param event - The `ChangeEvent` triggered by the `keydown` event.
+ * 
+ * Properties:
+ * - `event.target` - The target element of the event, expected to be an `HTMLInputElement`.
+ * - `event.key` - The key pressed during the `keydown` event.
+ * - `event.ctrlKey` - Indicates whether the `Control` key was pressed during the event.
+ * - `event.metaKey` - Indicates whether the `Meta` (Command) key was pressed during the event.
+ * - `event.altKey` - Indicates whether the `Alt` key was pressed during the event.
+ * - `event.nativeEvent` - The native event object, which should be a `KeyboardEvent`.
+ *
+ * Behavior:
+ * - Allows navigation keys (`Backspace`, `Tab`, `ArrowLeft`, `ArrowRight`, `Delete`).
+ * - Allows digits (`0-9`).
+ * - Allows one decimal point (`.`) if not already present in the input value.
+ * - Allows control/meta shortcuts (e.g., `Ctrl+C`, `Ctrl+V`).
+ * - Blocks all other keys by calling `event.preventDefault()`.
+ */
+export const keyDownEventHandler: ChangeEventHandler = (event) => {
+  if (!(event.target instanceof HTMLInputElement)) return;
+  const nativeEvent = (event as any)?.nativeEvent ?? event;
+  if (!(nativeEvent instanceof KeyboardEvent)) return;
+
+  // Only apply on number inputs in Safari.
+  if (!isNumberInputInSafari(event.target)) return;
+
+  const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete'];
+  const key = event.key;
+
+  // Allow control/meta shortcuts (e.g. Ctrl+C, Ctrl+V)
+  if (event.ctrlKey || event.metaKey || event.altKey) return;
+
+  // Allow navigation keys
+  if (allowedKeys.includes(key)) return;
+
+  // Allow digits
+  if (/^\d$/.test(key)) return;
+
+  // Allow one decimal point if not already present
+  if (key === '.' && !event.target.value.includes('.')) return;
+
+  // Block everything else
+  event.preventDefault();
 };

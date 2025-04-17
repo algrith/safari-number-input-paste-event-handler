@@ -1,15 +1,15 @@
 {
   "repository": {
-    "url": "git+https://github.com/algrith/safari-number-paste-handler.git",
+    "url": "git+https://github.com/algrith/safari-numfix.git",
     "type": "git"
   },
-  "homepage": "https://github.com/algrith/safari-number-paste-handler.git",
-  "name": "@algrith/safari-number-paste-handler",
+  "homepage": "https://github.com/algrith/safari-numfix.git",
+  "name": "@algrith/safari-numfix",
   "module": "dist/index.module.js",
   "unpkg": "dist/index.umd.js",
   "source": "src/index.ts",
   "main": "dist/index.js",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "type": "module",
   "files": [
     "/LICENSE",
@@ -28,17 +28,20 @@
   "engines": {
     "node": "18.0.0 - 22.x.x"
   },
-  "description": "A lightweight utility to safely handle paste events on <input type=\"number\"> fields in Safari. Provides a browser-aware workaround that preserves caret position, sanitizes multiple decimal points, and works with React, Vue, Angular, or vanilla JavaScript.",
+  "description": "A lightweight utility to safely handle paste & keydown events on <input type=\"number\"> fields in Safari. Provides a browser-aware workaround that preserves caret position, sanitizes multiple decimal points, and works with React, Vue, Angular, or vanilla JavaScript.",
   "keywords": [
     "safari",
     "paste",
-    "number input"
+    "number input",
+    "keydown",
+    "input-sanitization",
+    "form-validation"
   ],
   "author": "Algrith LLC <algrithllc@gmail.com> (https://algrith-astongemmy.vercel.app)",
   "license": "MIT",
   "types": "./dist/index.d.ts",
   "bugs": {
-    "url": "https://github.com/algrith/safari-number-paste-handler/issues"
+    "url": "https://github.com/algrith/safari-numfix/issues"
   },
   "publishConfig": {
     "access": "public"
