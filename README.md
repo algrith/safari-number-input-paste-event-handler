@@ -99,12 +99,15 @@ onPaste(event: ClipboardEvent) {
 ### VanillaJs
 
 ```html
-<input onkeydown="keyDownEventHandler" id="numInput" type="number" />
+<input id="numInput" type="number" />
 
 <script type="module">
-  import { pasteEventHandler } from 'https://cdn.skypack.dev/@algrith/safari-numfix';
+  import { keyDownEventHandler, pasteEventHandler } from 'https://cdn.skypack.dev/@algrith/safari-numfix';
 
   const input = document.getElementById('numInput');
+
+  input.addEventListener('keydown', keyDownEventHandler);
+
   input.addEventListener('paste', (e) => {
     pasteEventHandler(e, (event) => {
       console.log('Updated value:', event.target.value);
